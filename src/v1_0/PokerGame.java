@@ -34,8 +34,47 @@ public class PokerGame {
 		                   "[" + card[ hand[3] ] + "]" + 
 				           "[" + card[ hand[4] ] + "]");
 		System.out.println("  1    2    3    4    5  ");
-		System.out.print("何枚替えますか？（0-5）>");
-		in.nextInt();
+		
+		int change = 0;
+		while (true) {
+			System.out.print("何枚替えますか？（0-5）>");
+			change = in.nextInt();
+			if (0 <= change && change <= 5) {
+				break;
+			}
+		}
+		
+		int ex[] = new int[change];
+		for (int i = 0; i < change; i++) {
+			while (true) {
+				System.out.print((i + 1) + "枚目？(1-5)>"); // 配列exは0番目から始まる
+				ex[i] = in.nextInt() - 1; // 手札は0番目から始まる
+				boolean result = true; // デフォルトで正常
+				// 選択できる番号以外の場合
+				if (ex[i] < 0 || 4 < ex[i]) {
+					result = false;
+				}
+				for (int j = 0; j < i; j++) {
+					if (ex[i] == ex[j]) {
+						result = false;
+					}
+				}
+				if (result) {
+					break;
+				}
+			}
+		}
+		
+		for (int i = 0; i < change; i++) {
+			hand[ ex[i] ] = pile[ 5 + i ];
+		}
+		
+		System.out.println("[" + card[ hand[0] ] + "]" + 
+                			"[" + card[ hand[1] ] + "]" + 
+                			"[" + card[ hand[2] ] + "]" + 
+                			"[" + card[ hand[3] ] + "]" + 
+                			"[" + card[ hand[4] ] + "]");
+		System.out.println("  1    2    3    4    5  ");
 		
 		System.out.println(">>> Java Poker  END  <<<");
 	}
