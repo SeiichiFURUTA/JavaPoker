@@ -12,9 +12,9 @@ public class PokerGame {
 		String[] num  = {" A", " 2", " 3", " 4", " 5", " 6", " 7",
 						 " 8", " 9", "10", " J", " Q", " K"}; // トランプの数字部分
 		
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 13; j++) {
-				card[i * 13 + j] = suit[i] + num[j];
+		for (int i = 0; i < 13; i++) {
+			for (int j = 0; j < 4; j++) {
+				card[i * 4 + j] = suit[j] + num[i];
 			}
 		}
 		for (int i = 0; i < 52; i++) {
