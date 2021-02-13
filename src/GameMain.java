@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import v1_0.PokerGame;
-
 public class GameMain {
 
 	public static void main(String[] args) {
@@ -18,7 +16,7 @@ public class GameMain {
 			/*
 			 * ゲーム1回分の処理
 			 */
-			PokerGame.exec(stdIn);
+			v2_0.PokerGame.exec(stdIn);
 		}
 		
 		System.out.println("終了しました。");
