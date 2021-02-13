@@ -8,13 +8,14 @@ public class PokerGame {
 					 				" 8", " 9", "10", " J", " Q", " K"}; // トランプの数字部分
 	static final String[] card = new String[ suit.length * num.length ]; // トランプの表面
 	static final int HAND_MAX = 5; // 手札は5枚
-	static int[] pile = new int[card.length]; // 山札
-	static int[] hand = new int[HAND_MAX]; // 手札
-	static int next = 0; // 山札の次の場所
 	
 	public static void exec(Scanner in) { // Game1回分の処理
 		// 初期化部
 		init();
+		int[] pile = new int[card.length]; // 山札
+		pile = Shuffler.shuffle(pile);
+		int[] hand = new int[HAND_MAX]; // 手札
+		int next = 0; // 山札の次の場所
 		
 		// 処理部
 		System.out.println(">>> Java Poker START <<<");
@@ -25,8 +26,16 @@ public class PokerGame {
 		// 最初の手札を表示
 		dispHand(hand);
 		
+		// 手札の交換を指示
+		int[] ex = exchangeHand(in);
+		
 		// 手札を交換
-		exchangeHand(in);
+		for (int e : ex) {
+			hand[ e ] = pile[ next++ ];  // 山札の次の場所を手札にコピー
+		}
+//		for (int i = 0; i < change; i++) {
+//			hand[ ex[i] ] = pile[ HAND_MAX + i ];
+//		}
 		
 		// 交換後の手札を表示
 		dispHand(hand);
@@ -42,14 +51,10 @@ public class PokerGame {
 				card[i * suit.length + j] = suit[j] + num[i]; // 例）card[13] = card[3 * 4 + 1] = "♡ 4"
 			}
 		}
-		// 山札を初期化
-		for (int i = 0; i < pile.length; i++) {
-			pile[i] = i;
-		}
 	}
 	
 	// 手札の交換
-	private static void exchangeHand(Scanner in) {
+	private static int[] exchangeHand(Scanner in) {
 		int change = 0;
 		while (true) {
 			System.out.print("何枚換えますか？（0-" + HAND_MAX + "）>");
@@ -80,13 +85,7 @@ public class PokerGame {
 			}
 		}
 		
-		// 手札を交換
-		for (int e : ex) {
-			hand[ e ] = pile[ next++ ];  // 山札の次の場所を手札にコピー
-		}
-//		for (int i = 0; i < change; i++) {
-//			hand[ ex[i] ] = pile[ HAND_MAX + i ];
-//		}
+		return ex;
 	}
 
 	// 手札の表示
@@ -101,6 +100,7 @@ public class PokerGame {
 		System.out.println();
 	}
 
+	// 実験用ユーティリティ
 	public static void main(String[] args) {
 		exec(new Scanner(System.in));
 	}
