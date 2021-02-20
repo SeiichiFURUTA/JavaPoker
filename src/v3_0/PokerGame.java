@@ -44,9 +44,6 @@ public class PokerGame {
 		for (int e : ex) {
 			hand[e] = pile[next++]; // 山札の次の場所を手札にコピー
 		}
-		//		for (int i = 0; i < change; i++) {
-		//			hand[ ex[i] ] = pile[ HAND_MAX + i ];
-		//		}
 		// 手札を並べ替える（バブルソート）
 		for (int i = 0; i < hand.length; i++) { // 最小の手札（左端）から順に確定させる
 			for (int j = hand.length - 1; j > i; j--) { // 大きい手札（右端）から比較を開始
@@ -61,7 +58,9 @@ public class PokerGame {
 
 		// 交換後の手札を表示
 		dispHand(hand);
-
+		
+		// 役の表示
+		System.out.println(Checker.checkHand(hand) + "です。");
 		System.out.println(">>> Java Poker  END  <<<");
 	}
 
