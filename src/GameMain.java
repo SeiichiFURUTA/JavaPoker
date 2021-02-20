@@ -16,7 +16,7 @@ public class GameMain {
 			/*
 			 * ゲーム1回分の処理
 			 */
-			v2_0.PokerGame.exec(stdIn);
+			v3_0.PokerGame.exec(stdIn);
 		}
 		
 		System.out.println("終了しました。");
